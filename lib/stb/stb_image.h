@@ -572,16 +572,28 @@ STBIDEF int   stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const ch
 #endif
 
 #ifndef STBI_NO_THREAD_LOCALS
-   #if defined(__cplusplus) &&  __cplusplus >= 201103L
-      #define STBI_THREAD_LOCAL       thread_local
-   #elif defined (__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
-      #define STBI_THREAD_LOCAL       _Thread_local
-   #elif defined(__GNUC__)
-      #define STBI_THREAD_LOCAL       __thread
-   #elif defined(_MSC_VER)
-      #define STBI_THREAD_LOCAL       __declspec(thread)
+	#if defined(__cplusplus) && __cplusplus >= 201103L
+		#define STBI_THREAD_LOCAL thread_local
+	#elif defined(__GNUC__) && __GNUC < 5
+		#define STBI_THREAD_LOCAL __thread
+	#elif defined (_MSC_VER)
+		#define STBI_THREAD_LOCAL --declspec(thread)
+	#elif defined (__STDC_VERSION__) && __STDC_VERSION__ >= 201112L && !defined(__STDC_NO_THREADS__)
+		#define STBI_THREAD_LOCAL _Thread_local
+	#endif
 #endif
-#endif
+
+//#ifndef STBI_NO_THREAD_LOCALS
+//   #if defined(__cplusplus) &&  __cplusplus >= 201103L
+//      #define STBI_THREAD_LOCAL       thread_local
+//   #elif defined (__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+//      #define STBI_THREAD_LOCAL       _Thread_local
+//   #elif defined(__GNUC__)
+//      #define STBI_THREAD_LOCAL       __thread
+//   #elif defined(_MSC_VER)
+//      #define STBI_THREAD_LOCAL       __declspec(thread)
+//#endif
+//#endif
 
 #ifdef _MSC_VER
 typedef unsigned short stbi__uint16;
