@@ -24,10 +24,8 @@ BIN = bin
 all: dirs libs game
 
 libs:
-	#cd lib/cglm && sh autogen.sh && ./configure && make && make check
-#	cd lib/cglm && cmake . -DCGLM_STATIC=ON && make
-	#cd lib/glad && $(CC) -o src/glad.o -Iinclude -c src/glad.c
-#	cd lib/glfw && cmake . && make
+	cd lib/cglm && sh autogen.sh && ./configure && make && make check
+	cd lib/glad && $(CC) -o src/glad.o -Iinclude -c src/glad.c
 	cd lib/noise && make
 
 dirs:
