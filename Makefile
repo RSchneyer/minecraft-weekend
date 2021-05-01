@@ -4,7 +4,12 @@ CC = gcc
 CFLAGS = -std=c11 -O3 -g -Wall -Wextra -Wpedantic -Wstrict-aliasing
 CFLAGS += -Wno-pointer-arith -Wno-unused-parameter 
 CFLAGS += -Ilib/cglm/include -Ilib/glad/include -Ilib/glfw/include -Ilib/stb -Ilib/noise 
-LDFLAGS = lib/glad/src/glad.o lib/cglm/.libs/libcglm.a lib/noise/libnoise.a -lm
+LDFLAGS = lib/glad/src/glad.o lib/cglm/.libs/libcglm.a lib/noise/libnoise.a -lm 
+
+ifdef SIMPLEGL
+LDFLAGS += -L$(CDIR)/utils/lib64 -lglfw -lGLU -lGL -lsimpleGLU
+endif
+
 
 # GLFW required frameworks on OSX
 ifeq ($(UNAME_S), Darwin)
@@ -21,10 +26,11 @@ BIN = bin
 
 .PHONY: all clean
 
-all: dirs libs game
+all: dirs game
 
 libs:
-	cd lib/cglm && sh autogen.sh && ./configure && make && make check
+	git submodule init && git submodule update
+	cd lib/cglm && dos2unix autogen.sh && sh autogen.sh && ./configure && make && make check
 	cd lib/glad && $(CC) -o src/glad.o -Iinclude -c src/glad.c
 	cd lib/noise && make
 
@@ -36,6 +42,7 @@ run: all
 
 game: $(OBJ)
 	$(CC) -o $(BIN)/game $^ $(LDFLAGS)
+	dos2unix res/shaders/*
 
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
