@@ -1,7 +1,7 @@
 UNAME_S = $(shell uname -s)
 
 CC = gcc
-CFLAGS = -std=c11 -O3 -g -Wall -Wextra -Wpedantic -Wstrict-aliasing
+CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -Wstrict-aliasing
 CFLAGS += -Wno-pointer-arith -Wno-unused-parameter 
 CFLAGS += -Ilib/cglm/include -Ilib/glad/include -Ilib/glfw/include -Ilib/stb -Ilib/noise 
 LDFLAGS = lib/glad/src/glad.o lib/cglm/.libs/libcglm.a lib/noise/libnoise.a -lm 
@@ -10,6 +10,17 @@ ifdef SIMPLEGL
 LDFLAGS += -L$(CDIR)/utils/lib64 -lglfw -lGLU -lGL -lsimpleGLU
 endif
 
+
+ifeq (${BUILD_TYPE}, DEBUG)
+CFLAGS += -O0 -g
+else
+CFLAGS	+= -O2
+endif
+
+ifeq (${BUILD_SANITIZE}, TRUE)
+CFLAGS += -fsanitize=address 
+LDFLAGS += -fsanitize=address 
+endif
 
 # GLFW required frameworks on OSX
 ifeq ($(UNAME_S), Darwin)
