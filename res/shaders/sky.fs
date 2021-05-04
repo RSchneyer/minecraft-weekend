@@ -18,7 +18,7 @@ layout (location = 1) out vec4 frag_coord;
 
 void main() {
   vec4 color_temp;
-    // color_temp = color * ((use_tex * texture(tex, v_uv + uv_offset)) + ((1.0 - use_tex) * vec4(1.0)));
+    frag_color = color * ((use_tex * texture(tex, v_uv + uv_offset)) + ((1.0 - use_tex) * vec4(1.0)));
 
     // // TODO: this is bad for performance
     // // if (color_temp.a < 0.001) {
@@ -36,6 +36,6 @@ void main() {
     // fog = fog * fog * (3.0 - 2.0 * fog);
     // vec4 mix_result = color_temp * (1 - fog) + fog_color * fog;
     // frag_color = vec4(mix_result.rgb, color_temp.a);
-    frag_color = vec4(0.0, 0.7, 1.0, 1.0);
+    //frag_color = vec4(0.0, 0.7, 1.0, 1.0);
     frag_coord = gl_FragCoord;
 }
