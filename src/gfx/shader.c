@@ -97,6 +97,7 @@ void shader_uniform_mat4(struct Shader self, char *name, mat4s m) {
 }
 
 void shader_uniform_view_proj(struct Shader self, struct ViewProj view_proj) {
+    //TODO use cglm_mulv or whatever to combine these into a single pv matrix, can we somehow combine m matrix too?
     shader_uniform_mat4(self, "p", view_proj.proj);
     shader_uniform_mat4(self, "v", view_proj.view);
 }

@@ -162,7 +162,7 @@ static void plane_render(struct Sky *self, struct Texture *tex, vec4s color, mat
     shader_uniform_mat4(state.renderer.shaders[SHADER_SKY], "m", m);
     shader_uniform_vec4(state.renderer.shaders[SHADER_SKY], "color", color);
 
-    shader_uniform_int(state.renderer.shaders[SHADER_SKY], "use_tex", tex != NULL);
+    shader_uniform_float(state.renderer.shaders[SHADER_SKY], "use_tex", tex ? 1.0 : 0.0);
     if (tex != NULL) {
         shader_uniform_texture2D(state.renderer.shaders[SHADER_SKY], "tex", *tex, 0);
     }
