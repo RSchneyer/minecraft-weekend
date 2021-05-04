@@ -11,6 +11,7 @@ layout (location = 0) out vec4 frag_color;
 layout (location = 1) out vec4 frag_coord;
 
 void main() {
+    
     frag_color = ((use_tex * texture(tex, v_uv)) + ((1.0 - use_tex) * vec4(1.0))) * v_color;
     frag_coord = gl_FragCoord;
 }

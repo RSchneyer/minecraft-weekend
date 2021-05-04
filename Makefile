@@ -8,8 +8,11 @@ LDFLAGS = lib/glad/src/glad.o lib/cglm/.libs/libcglm.a lib/noise/libnoise.a -lm
 
 ifdef SIMPLEGL
 LDFLAGS += -L$(CDIR)/utils/lib64 -lglfw -lGLU -lGL -lsimpleGLU
+else
+ifdef WSL_DISTRO_NAME
+CFLAGS += -DWSL_NOSGP
 endif
-
+endif
 
 ifeq (${BUILD_TYPE}, DEBUG)
 CFLAGS += -O0 -g

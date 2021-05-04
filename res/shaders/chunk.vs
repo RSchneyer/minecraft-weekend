@@ -2,7 +2,10 @@
 
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec2 uv;
-layout (location = 2) in uint color;
+//layout (location = 2) in uint color;
+
+//TODO......
+const uint color = 0xFFFFFU;
 
 uniform mat4 m;
 uniform mat4 v;
@@ -46,20 +49,20 @@ void main() {
     light += vec3(min_light);
 
     // adjust lighting for direction
-    uint direction = (color & 0x700000U) >> 20U;
-    if (direction == UP) {
-        light *= 1.0;
-    } else if (direction == EAST || direction == WEST) {
-        light *= 0.8;
-    } else if (direction == NORTH || direction == SOUTH) {
-        light *= 0.6;
-    } else {
-        light *= 0.5;
-    }
+    // uint direction = (color & 0x700000U) >> 20U;
+    // if (direction == UP) {
+    //     light *= 1.0;
+    // } else if (direction == EAST || direction == WEST) {
+    //     light *= 0.8;
+    // } else if (direction == NORTH || direction == SOUTH) {
+    //     light *= 0.6;
+    // } else {
+    //     light *= 0.5;
+    // }
 
     // set and gamma correct
-    v_color = vec4(light, 1.0);
-    v_color = vec4(pow(v_color.rgb, vec3(1.0 / 2.2)), v_color.a);
+    vec4 color_temp = vec4(light, 1.0);
+    v_color = vec4(pow(color_temp.rgb, vec3(1.0 / 2.2)), color_temp.a);
 
     // v_color = vec4(vec3(sunlight_color.rgb) * (((color & 0xF0000U) >> 16U) / 15.0), 1.0);
 
