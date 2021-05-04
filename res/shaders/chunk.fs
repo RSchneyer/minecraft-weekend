@@ -1,12 +1,14 @@
-#version 330
+#version 430
 
 uniform sampler2D tex;
 
-in vec4 v_color;
-in vec2 v_uv;
-in vec3 v_viewpos;
+//layout (location = 0) in vec4 gl_FragCoord
+layout (location = 1) in vec4 v_color;
+layout (location = 2) in vec2 v_uv;
+layout (location = 3) in vec3 v_viewpos;
 
-out vec4 frag_color;
+layout (location = 0) out vec4 frag_color;
+layout (location = 1) out vec4 frag_coord;
 
 uniform vec4 fog_color;
 uniform float fog_near;
@@ -21,4 +23,5 @@ void main() {
     }
 
     frag_color *= 1.0 - smoothstep(fog_near, fog_far, length(v_viewpos));
+    frag_coord = gl_FragCoord;
 }
