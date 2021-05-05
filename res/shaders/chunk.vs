@@ -5,7 +5,7 @@ layout (location = 1) in vec2 uv;
 //layout (location = 2) in uint color;
 
 //TODO......
-const uint color = 0xFFFFFU;
+//const uint color = 0xFFFFFU;
 
 uniform mat4 m;
 uniform mat4 v;
@@ -34,19 +34,19 @@ void main() {
     // - (4) R
     // - (4) G
     // - (4) B
-    // - (4) intensity
-    vec3 light = vec3(
-        float((color & 0x0F000U) >> 12U) / 15.0,
-        float((color & 0x00F00U) >>  8U) / 15.0,
-        float((color & 0x000F0U) >>  4U) / 15.0
-    ) * (float(color & 0x0000FU) / 15.0);
+    // // - (4) intensity
+    // vec3 light = vec3(
+    //     float((color & 0x0F000U) >> 12U) / 15.0,
+    //     float((color & 0x00F00U) >>  8U) / 15.0,
+    //     float((color & 0x000F0U) >>  4U) / 15.0
+    // ) * (float(color & 0x0000FU) / 15.0);
 
-    light = max(vec3(sunlight_color.rgb) * (float((color & 0xF0000U) >> 16U) / 15.0), light);
+    //vec3 light = max(vec3(sunlight_color.rgb), vec3(1.0));
 
     // adjust light range to prevent entirely black lighting
-    const float min_light = 0.0025;
-    light *= vec3(1.0 - min_light);
-    light += vec3(min_light);
+    // const float min_light = 0.0025;
+    // light *= vec3(1.0 - min_light);
+    // light += vec3(min_light);
 
     // adjust lighting for direction
     // uint direction = (color & 0x700000U) >> 20U;
@@ -60,9 +60,10 @@ void main() {
     //     light *= 0.5;
     // }
 
-    // set and gamma correct
-    vec4 color_temp = vec4(light, 1.0);
-    v_color = vec4(pow(color_temp.rgb, vec3(1.0 / 2.2)), color_temp.a);
+    // // set and gamma correct
+    // vec4 color_temp = vec4(1.0);
+    // v_color = vec4(pow(color_temp.rgb, vec3(0.45454545)), color_temp.a);
+    v_color = vec4(1.0);
 
     // v_color = vec4(vec3(sunlight_color.rgb) * (((color & 0xF0000U) >> 16U) / 15.0), 1.0);
 
