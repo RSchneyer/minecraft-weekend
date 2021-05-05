@@ -316,7 +316,9 @@ void chunkmesh_render(struct ChunkMesh *self, enum ChunkMeshPart part) {
     const size_t vertex_size = (5 * sizeof(f32)) + (1 * sizeof(u32));
     vao_attr(self->vao, self->vbo, 0, 3, GL_FLOAT, vertex_size, 0 * sizeof(f32));
     vao_attr(self->vao, self->vbo, 1, 2, GL_FLOAT, vertex_size, 3 * sizeof(f32));
-    vao_attr(self->vao, self->vbo, 2, 1, GL_UNSIGNED_INT, vertex_size, 5 * sizeof(f32));
+    //NB: removing this becuase we have color as constant
+    //TODO if color is put back, replace this
+    //vao_attr(self->vao, self->vbo, 2, 1, GL_UNSIGNED_INT, vertex_size, 5 * sizeof(f32));
 
     vao_bind(self->vao);
     vbo_bind(self->ibo);
