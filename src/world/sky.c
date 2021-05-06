@@ -301,9 +301,9 @@ void sky_render(struct Sky *self) {
     renderer_use_shader(&state.renderer, SHADER_SKY);
     renderer_set_view_proj(&state.renderer);
     shader_uniform_vec2(state.renderer.shaders[SHADER_SKY], "uv_offset", GLMS_VEC2_ZERO);
-    shader_uniform_vec4(state.renderer.shaders[SHADER_SKY], "fog_color", self->fog_color);
-    shader_uniform_float(state.renderer.shaders[SHADER_SKY], "fog_near", self->fog_near / 8.0f);
-    shader_uniform_float(state.renderer.shaders[SHADER_SKY], "fog_far", self->fog_far);
+    // shader_uniform_vec4(state.renderer.shaders[SHADER_SKY], "fog_color", self->fog_color);
+    // shader_uniform_float(state.renderer.shaders[SHADER_SKY], "fog_near", self->fog_near / 8.0f);
+    // shader_uniform_float(state.renderer.shaders[SHADER_SKY], "fog_far", self->fog_far);
 
     // sky plane
     plane_render(

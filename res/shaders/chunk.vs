@@ -26,6 +26,7 @@ layout (location = 2) out vec2 v_uv;
 layout (location = 3) out vec3 v_viewpos;
 
 void main() {
+    
     gl_Position = p * v * m * vec4(position, 1.0);
     
     // 'color' is packed:
