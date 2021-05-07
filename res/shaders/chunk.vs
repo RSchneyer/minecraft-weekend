@@ -28,46 +28,7 @@ layout (location = 3) out vec3 v_viewpos;
 void main() {
     
     gl_Position = p * v * m * vec4(position, 1.0);
-    
-    // 'color' is packed:
-    // - (3) face direction, NORTH, SOUTH, EAST, WEST, UP, DOWN
-    // - (4) sunlight intensity
-    // - (4) R
-    // - (4) G
-    // - (4) B
-    // // - (4) intensity
-    // vec3 light = vec3(
-    //     float((color & 0x0F000U) >> 12U) / 15.0,
-    //     float((color & 0x00F00U) >>  8U) / 15.0,
-    //     float((color & 0x000F0U) >>  4U) / 15.0
-    // ) * (float(color & 0x0000FU) / 15.0);
-
-    //vec3 light = max(vec3(sunlight_color.rgb), vec3(1.0));
-
-    // adjust light range to prevent entirely black lighting
-    // const float min_light = 0.0025;
-    // light *= vec3(1.0 - min_light);
-    // light += vec3(min_light);
-
-    // adjust lighting for direction
-    // uint direction = (color & 0x700000U) >> 20U;
-    // if (direction == UP) {
-    //     light *= 1.0;
-    // } else if (direction == EAST || direction == WEST) {
-    //     light *= 0.8;
-    // } else if (direction == NORTH || direction == SOUTH) {
-    //     light *= 0.6;
-    // } else {
-    //     light *= 0.5;
-    // }
-
-    // // set and gamma correct
-    // vec4 color_temp = vec4(1.0);
-    // v_color = vec4(pow(color_temp.rgb, vec3(0.45454545)), color_temp.a);
     v_color = vec4(1.0);
-
-    // v_color = vec4(vec3(sunlight_color.rgb) * (((color & 0xF0000U) >> 16U) / 15.0), 1.0);
-
     v_uv = uv;
     v_viewpos = ((v * m) * vec4(position, 1.0)).xyz;
 }

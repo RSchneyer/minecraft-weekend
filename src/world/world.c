@@ -397,11 +397,11 @@ void world_render(struct World *self) {
     renderer_set_camera(&state.renderer, CAMERA_PERSPECTIVE);
     renderer_set_view_proj(&state.renderer);
     shader_uniform_texture2D(state.renderer.shaders[SHADER_CHUNK], "tex", state.renderer.block_atlas.atlas.texture, 0);
-    shader_uniform_vec4(state.renderer.shaders[SHADER_CHUNK], "sunlight_color", self->sky.sunlight_color);
+    //shader_uniform_vec4(state.renderer.shaders[SHADER_CHUNK], "sunlight_color", self->sky.sunlight_color);
 
-    shader_uniform_vec4(state.renderer.shaders[SHADER_CHUNK], "fog_color", self->sky.fog_color);
-    shader_uniform_float(state.renderer.shaders[SHADER_CHUNK], "fog_near", self->sky.fog_near);
-    shader_uniform_float(state.renderer.shaders[SHADER_CHUNK], "fog_far", self->sky.fog_far);
+    // shader_uniform_vec4(state.renderer.shaders[SHADER_CHUNK], "fog_color", self->sky.fog_color);
+    // shader_uniform_float(state.renderer.shaders[SHADER_CHUNK], "fog_near", self->sky.fog_near);
+    // shader_uniform_float(state.renderer.shaders[SHADER_CHUNK], "fog_far", self->sky.fog_far);
     
 
     // render solid geometry in no particular order

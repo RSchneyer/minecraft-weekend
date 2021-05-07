@@ -12,6 +12,7 @@ layout (location = 1) out vec4 v_color;
 layout (location = 2) out vec2 v_uv;
 
 void main() {
+  
     gl_Position = p * v * m * vec4(position, 1.0);
     v_color = color;
     v_uv = uv;

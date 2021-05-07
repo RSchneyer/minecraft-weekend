@@ -10,6 +10,7 @@ uniform mat4 p;
 layout (location = 1) out vec2 v_uv;
 
 void main() {
+  
     gl_Position = p * v * m * vec4(position, 1.0);
     v_uv = uv;
 }
